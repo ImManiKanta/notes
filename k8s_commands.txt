@@ -1,0 +1,32 @@
+k8s commands
+============
+1. get
+2. describe
+3. create
+4. delete
+5. apply
+
+-> eksctl create cluster --config-file=eks.yaml
+-> eksctl delete cluster --name <cluster-name>
+
+#when your not able to connect to cluster , api issue use the below cmd
+-> aws eks update-kubeconfig --region <your-region> --name <your-cluster-name> 
+
+-> kubectl api-resources
+-> kubectl get nodes
+
+namespace
+=========
+-> kubectl get namespace
+-> kubectl get namespace or kubectl get ns
+-> kubectl create namespace roboshop (through cli we can use this) or u can write yaml file
+-> kubectl apply -f 01-namespace.yaml 
+-> kubectl delete -f 01-namespace.yaml-> to execute the changes
+-> kubectl describe ns <namespace-name>
+-> kubectl delete namespace roboshop 
+
+pod
+===
+-> kubectl apply -f 02-pod.yaml
+-> kubectl get pods -o wide -> it will fetch from default namespace
+-> kubectl get pods -o wide -n <namespace-name>

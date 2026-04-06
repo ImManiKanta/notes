@@ -1,0 +1,168 @@
+for i in 1.vpc/ 2.sg/ 3.sg-rule/ 8.acm/ 9.frontend-alb/ 6.backend-alb/ 4.bastion/ ; do cd $i; terraform init; terraform apply -auto-approve; echo "--------------------------------- $i done --------------------------------- "; cd ..; done
+
+for i in $(ls -dr *); do cd $i; terraform init; terraform destroy -auto-approve; echo "--------------------------------- $i done --------------------------------- "; cd ..;done
+
+
+NACL vs Security groups in AWS
+SG
+-> Attached to instance level.
+-> Source is ip address or security groups
+-> U cant give deny rule
+-> SG is stateful, it will automatically give outbound response to request
+
+NACL
+-> attached to subnet level
+-> Source will be cidr of subnet
+-> U can give deny rules
+-> NACL is first layer of defence then SG
+-> NACLs are stateless, you have to give outbound rule then only it will give response back to request
+
+
+FROM instruction
+-> It is used to get base os from local(if available) or from docker hub
+Ex: FROM node:20
+
+RUN Instruction
+It will be used create any packages or run any commands, It will be executed at the build time.IT WILL NOT execute at the run time
+
+Ex: RUN dnf install nginx -y
+RUN useradd mani
+
+CMD
+iT IS USED TO RUN the container, it will be executed at the run time.IT WILL NOT execute at the build time
+ 
+LABEL
+It add the metadata to the image like a key value pairs
+LABEL Course="Docker" \
+      NAME="Mani"
+
+
+EXPOSE
+IT IS USED TO DISPLAY THE PORT INFORMATION OF CONTAINER, IT will not really open the port, provide only information.
+FROM almalinux:9
+     RUN dnf install nginx -y
+     EXPOSE 80
+
+
+ENV
+iT IS USED TO PROVIDE THE ENV VARIABLES TO THE ONTAINER, APP CODE CAN ACCESS THESE ENV VARS AND USE THEM
+ENV MONDB="admin"
+
+COPY 
+iT IS USED TO COPY THE FILE FROM LOCAL TO CONTAINER
+
+COPY index.html /usr/share/ngnx/html/
+
+ADD
+It is also used to copy the files but it has 2 extra features the COPY
+1. It can fetch the content from internet and downloads 
+2. It can untar the tar file in destination
+
+ADD https://raw.github.com/ /tmp/
+ADD sample.tar /tmp/
+
+
+ENTRYPOINT
+IT IS USED TO PROVIDE 
+
+
+user
+it is used to change the user that container runs
+
+FROM almalinus:9
+RUN dnf install nginx -y
+RUN useradd mani
+USER mani
+
+
+WORKDIR
+It is used to set the current workdir in the container
+
+FROM almalinuix:9
+#It will creates the dir and set as current dir
+WORKDIR app/
+
+
+=================================
+
+DOCKER COMMANDS
+==============
+
+Docker home location : /var/lib/docker/
+
+-> docker ps 
+show the running container
+
+-> doker images
+show the builded images
+
+-> docker build -t nginx:1.0.0 .  
+creates the image from a dockerfile
+
+-> docker run -d nginx:1.0.0
+create and run the container
+
+-> docker run -d -p 805::80 nginx:1.0.0
+run the container at port 805(THIS PORT CAN BE ANYTHING) and 80 is nginx listening port(we will get it from nginx official doc)
+
+-> docker exec -it nginx:1.0.0 bash
+login inside a container with bash
+
+-> docke rm container-id
+to remove container
+
+-> docke rm -f tainer-id
+to remove running container
+
+- docke rm -f image-name
+to remove running image
+
+-> docker ps -a -q
+-> To list all container ids
+
+-> docker ps -a 
+to list all running and exited containers
+
+-> docker nginx:1.0.0 nginx:1.0.1
+to rename the tag for a image
+
+-> docker inspect image-name or container-id
+to check the image details
+
+-> docker logs container-id
+logs of container
+
+-> docker network 
+connect internal containers to one network so that they can communicate each other.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

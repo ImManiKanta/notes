@@ -1,0 +1,24 @@
+To delete the unsuccessfully created cluster or in the middle cluster creation aborted, you use the below cmds to cleanup the uncreated cluster
+
+1. Check CloudFormation stacks
+aws cloudformation describe-stacks --region us-east-1 --stack-name eksctl-roboshop-cluster
+
+2. Disable termination protection
+aws cloudformation update-termination-protection \
+  --stack-name eksctl-roboshop-cluster \
+  --region us-east-1 \
+  --no-enable-termination-protection
+  
+3. Delete the stack
+aws cloudformation delete-stack \
+  --stack-name eksctl-roboshop-cluster \
+  --region us-east-1
+  
+4. Wait for deletion to complete
+aws cloudformation wait stack-delete-complete \
+  --stack-name eksctl-roboshop-cluster \
+  --region us-east-1
+  
+5. Recreate the cluster
+eksctl create cluster --config-file=eks.yaml
+=======================================================
