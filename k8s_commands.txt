@@ -30,3 +30,5 @@ pod
 -> kubectl apply -f 02-pod.yaml
 -> kubectl get pods -o wide -> it will fetch from default namespace
 -> kubectl get pods -o wide -n <namespace-name>
+-> kubectl describe pod <podname>
+-> kubectl logs <podname>
