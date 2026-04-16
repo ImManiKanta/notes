@@ -10,7 +10,7 @@ k8s commands
 -> eksctl delete cluster --name <cluster-name>
 
 #when your not able to connect to cluster , api issue use the below cmd
--> aws eks update-kubeconfig --region <your-region> --name <your-cluster-name> 
+-> aws eks update-kubeconfig --region us-east-1 --name roboshop 
 
 -> kubectl api-resources
 -> kubectl get nodes
@@ -30,5 +30,21 @@ pod
 -> kubectl apply -f 02-pod.yaml
 -> kubectl get pods -o wide -> it will fetch from default namespace
 -> kubectl get pods -o wide -n <namespace-name>
--> kubectl describe pod <podname>
+-> kubectl describe pod <podname> -> u can see the events what happened from start of container
 -> kubectl logs <podname>
+-> kubectl exec -it <pod-name> -- bash #go inside pod
+
+service
+=======
+kubectl get svc
+kubectl describe svc <service-name>
+
+sets
+====
+1. replicaset
+
+kubectl get rs name
+kubectl edit rs name
+kubectl delete rs nginx
+
+2. deployment
